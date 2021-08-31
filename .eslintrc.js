@@ -1,3 +1,10 @@
+const fs = require('fs');
+
+const foldersUnderSrc = fs
+  .readdirSync('src', { withFileTypes: true })
+  .filter((dirent) => dirent.isDirectory())
+  .map((dirent) => dirent.name);
+
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -20,7 +27,15 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'simple-import-sort/imports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^@?\\w'],
+          [`^(${foldersUnderSrc.join('|')})(/.*|$)`, '^\\.'],
+        ],
+      },
+    ],
     'simple-import-sort/exports': 'error',
   },
 };
