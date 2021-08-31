@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 
-import { BaseOutput } from 'common/interceptors/dtos/base-response';
+import { BaseOutput } from 'common/dtos/base-response';
 import { AppService } from './app.service';
 
 @Controller()

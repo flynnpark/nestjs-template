@@ -7,7 +7,7 @@ import {
 import { Request } from 'express';
 import { map, Observable } from 'rxjs';
 
-import { BaseOutput, BaseResponse } from './dtos/base-response';
+import { BaseOutput, BaseResponse } from '../dtos/base-response';
 
 @Injectable()
 export class ResponseInterceptor<T>
