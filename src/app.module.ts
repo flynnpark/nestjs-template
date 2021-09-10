@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 
 import { ResponseInterceptor } from 'common/interceptors/response.interceptor';
-import configutation from 'config/configutation';
+import { validationSchema } from 'config/validation';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -11,7 +11,11 @@ import { AppService } from './app.service';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [configutation],
+      validationSchema,
+      validationOptions: {
+        allowUnknown: true,
+        abortEarly: true,
+      },
     }),
   ],
   controllers: [AppController],
