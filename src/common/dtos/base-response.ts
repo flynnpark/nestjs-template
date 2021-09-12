@@ -1,17 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
-export class BaseOutput<T> {
-  @ApiProperty({ nullable: true })
+export class BaseResponse<T = any> {
+  @ApiProperty({ example: 'true' })
+  success: boolean;
+
+  @ApiProperty({ example: '/' })
+  path: string;
+
+  @ApiProperty({ nullable: true, example: '메세지' })
   message?: string | null;
 
-  @ApiProperty({ nullable: true })
+  @ApiProperty({ nullable: true, example: null })
   result?: T | null;
 }
 
-export class BaseResponse<T> extends BaseOutput<T> {
-  @ApiProperty()
-  success: boolean;
-
-  @ApiProperty()
-  path: string;
+export class BaseOutput<T> extends PickType<BaseResponse, 'message'>(
+  BaseResponse,
+  ['message'],
+) {
+  result?: T | null;
 }

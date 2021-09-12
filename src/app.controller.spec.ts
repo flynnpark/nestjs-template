@@ -17,7 +17,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "NestJS template"', () => {
-      expect(appController.getHello()).toStrictEqual({
+      expect(appController.getHome()).toStrictEqual({
         message: 'NestJS template',
       });
     });
